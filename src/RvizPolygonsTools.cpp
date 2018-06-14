@@ -1,4 +1,4 @@
-#include <motion_viewer/RvizPolygonsTools.hpp>
+#include <locomotion-viewer/RvizPolygonsTools.hpp>
 
 //namespace rviz_visual_tools{
 

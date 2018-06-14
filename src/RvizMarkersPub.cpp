@@ -5,7 +5,7 @@
  *      Author: Romeo Orsolino
  */
 
-#include "../include/motion_viewer/RvizMarkersPub.h"
+#include "../include/locomotion-viewer/RvizMarkersPub.h"
 
 RvizMarkersPub::RvizMarkersPub(const unsigned int cycles)
 {

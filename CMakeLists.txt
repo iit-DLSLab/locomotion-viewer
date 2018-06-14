@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(motion_viewer)
+project(locomotion-viewer)
 
 find_package(catkin REQUIRED
   roscpp

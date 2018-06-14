@@ -5,7 +5,7 @@
  *      Author: Romeo Orsolino
  */
 
-#include "../include/motion_viewer/OnlineID.h"
+#include "../include/locomotion-viewer/OnlineID.h"
 
 
 OnlineID::OnlineID()
