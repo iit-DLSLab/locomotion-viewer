@@ -32,6 +32,13 @@ public:
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");   
 
+  bool publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
+                                              Eigen::VectorXd & eigen_path_y,
+                                              Eigen::VectorXd & eigen_path_z,
+                                              rviz_visual_tools::colors color,
+                                              rviz_visual_tools::scales scale,
+                                              const std::string & ns);
+
   bool publishTriangle(const Eigen::Affine3d& pose, 
                                         Eigen::Vector3d v1,
                                         Eigen::Vector3d v2,

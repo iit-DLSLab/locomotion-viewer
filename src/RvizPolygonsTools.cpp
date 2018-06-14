@@ -40,9 +40,38 @@ bool RvizPolygonsTools::publishEigenPath(Eigen::VectorXd & eigen_path_x,
       trajectory.push_back(temp);
     }
 
-  publishSphere(first, rviz_visual_tools::RED, rviz_visual_tools::XXXLARGE, "initial_point");   
-  publishSpheres(trajectory, color, rviz_visual_tools::XLARGE, "intermediate_points");    
+  publishSphere(first, rviz_visual_tools::RED, rviz_visual_tools::XXXXLARGE, "initial_point");
+  publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
   publishPath(trajectory, color, scale, ns);
+}
+
+bool RvizPolygonsTools::publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
+                                            Eigen::VectorXd & eigen_path_y,
+                                            Eigen::VectorXd & eigen_path_z,
+                                            rviz_visual_tools::colors color,
+                                            rviz_visual_tools::scales scale,
+                                            const std::string & ns)
+{
+
+  geometry_msgs::Point temp;
+  geometry_msgs::Point first;
+  std::vector<geometry_msgs::Point> trajectory;
+  int points_num = eigen_path_x.rows();
+
+  for (std::size_t i = 0; i < points_num; ++i)
+    {
+      temp.x = eigen_path_x(i);
+      temp.y = eigen_path_y(i);
+      temp.z = eigen_path_z(i);
+
+    if (i == 0)
+      {
+        first = temp;
+      }
+
+      trajectory.push_back(temp);
+    }
+  publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
 }
 
 bool RvizPolygonsTools::publishTriangle(const Eigen::Affine3d& pose, rviz_visual_tools::colors color, double scale)
