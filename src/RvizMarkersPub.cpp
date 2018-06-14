@@ -127,7 +127,7 @@ int RvizMarkersPub::publish_markers(int argc, char** argv){
       std::cout<<avg_particle_[t].transpose()<<std::endl;
     }
   // set the name of the ROS node
-  ros::init(argc, argv, "motion_viewer");
+  ros::init(argc, argv, "online_id");
   ros::NodeHandle n;
   ros::Rate r(1);
   // set the name of the marker

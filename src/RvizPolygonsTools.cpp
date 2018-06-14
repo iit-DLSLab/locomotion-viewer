@@ -22,6 +22,7 @@ bool RvizPolygonsTools::publishEigenPath(Eigen::VectorXd & eigen_path_x,
                     const std::string & ns){
 
   geometry_msgs::Point temp;
+  geometry_msgs::Point first;
   std::vector<geometry_msgs::Point> trajectory;
   int points_num = eigen_path_x.rows();
 
@@ -31,9 +32,16 @@ bool RvizPolygonsTools::publishEigenPath(Eigen::VectorXd & eigen_path_x,
       temp.y = eigen_path_y(i);
       temp.z = eigen_path_z(i);
 
+    if (i == 0)
+      {
+        first = temp;
+      }
+
       trajectory.push_back(temp);
     }
 
+  publishSphere(first, rviz_visual_tools::RED, rviz_visual_tools::XXXLARGE, "initial_point");   
+  publishSpheres(trajectory, color, rviz_visual_tools::XLARGE, "intermediate_points");    
   publishPath(trajectory, color, scale, ns);
 }
 
