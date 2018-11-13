@@ -28,9 +28,30 @@ public:
   bool publishEigenPath(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
-                    rviz_visual_tools::colors color = rviz_visual_tools::RED,
+                    rviz_visual_tools::colors color = rviz_visual_tools::RED_,
+                    rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
+                    const std::string & ns = "Path");
+
+  bool publishEigenPathWithWayPoints(Eigen::VectorXd & eigen_path_x,
+                    Eigen::VectorXd & eigen_path_y,
+                    Eigen::VectorXd & eigen_path_z,
+                    rviz_visual_tools::colors color = rviz_visual_tools::RED_,
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");   
+
+  bool publishPolyhedronPerimeter(Eigen::VectorXd & eigen_path_x,
+                    Eigen::VectorXd & eigen_path_y,
+                    Eigen::VectorXd & eigen_path_z,
+                    rviz_visual_tools::colors color = rviz_visual_tools::RED_,
+                    rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
+                    const std::string & ns = "Path");
+
+  bool publishPolyhedronWithSurface(Eigen::VectorXd & eigen_path_x,
+                    Eigen::VectorXd & eigen_path_y,
+                    Eigen::VectorXd & eigen_path_z,
+                    rviz_visual_tools::colors color = rviz_visual_tools::RED_,
+                    rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
+                    const std::string & ns = "Path");
 
   bool publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
                                               Eigen::VectorXd & eigen_path_y,
@@ -39,7 +60,14 @@ public:
                                               rviz_visual_tools::scales scale,
                                               const std::string & ns);
 
-  bool publishTriangle(const Eigen::Affine3d& pose, 
+  bool publishTriangle(Eigen::Vector3d v1,
+                                        Eigen::Vector3d v2,
+                                        Eigen::Vector3d v3,
+                                        bool frame_flag = true,
+                                        rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,
+                                        double scale = 1.0);
+
+  bool publishTriangle(const Eigen::Affine3d& pose,
                                         Eigen::Vector3d v1,
                                         Eigen::Vector3d v2,
                                         Eigen::Vector3d v3,
@@ -93,6 +121,12 @@ public:
                                         bool frame_flag = true,
                                         rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
                                         double scale = 1.0);
+
+  bool publishHexahedron(const Eigen::Affine3d& pose,
+                                            Eigen::Matrix<double, 3, 8> force_polygon,
+                                            bool frame_flag = true,
+                                            rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,
+                                            double scale = 1.0);
 
   bool publishHexahedron(const Eigen::Affine3d& pose, 
                                         Eigen::Vector3d v1,

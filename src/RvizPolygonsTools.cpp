@@ -13,8 +13,32 @@ RvizPolygonsTools::~RvizPolygonsTools(){
 
 }
 
-
 bool RvizPolygonsTools::publishEigenPath(Eigen::VectorXd & eigen_path_x,
+                    Eigen::VectorXd & eigen_path_y,
+                    Eigen::VectorXd & eigen_path_z,
+                    rviz_visual_tools::colors color,
+                    rviz_visual_tools::scales scale,
+                    const std::string & ns){
+
+  geometry_msgs::Point temp;
+  std::vector<geometry_msgs::Point> trajectory;
+  int points_num = eigen_path_x.rows();
+
+  for (std::size_t i = 0; i < points_num; ++i)
+    {
+      temp.x = eigen_path_x(i);
+      temp.y = eigen_path_y(i);
+      temp.z = eigen_path_z(i);
+
+      trajectory.push_back(temp);
+    }
+
+  //publishSphere(first, rviz_visual_tools::RED_, rviz_visual_tools::XXXXLARGE, "initial_point");
+  //publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
+  publishPath(trajectory, color, scale, ns);
+}
+
+bool RvizPolygonsTools::publishEigenPathWithWayPoints(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
                     rviz_visual_tools::colors color,
@@ -40,9 +64,106 @@ bool RvizPolygonsTools::publishEigenPath(Eigen::VectorXd & eigen_path_x,
       trajectory.push_back(temp);
     }
 
-  publishSphere(first, rviz_visual_tools::RED, rviz_visual_tools::XXXXLARGE, "initial_point");
+  publishSphere(first, rviz_visual_tools::RED_, rviz_visual_tools::XXXXLARGE, "initial_point");
   publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
   publishPath(trajectory, color, scale, ns);
+}
+
+bool RvizPolygonsTools::publishPolyhedronPerimeter(Eigen::VectorXd & eigen_path_x,
+                    Eigen::VectorXd & eigen_path_y,
+                    Eigen::VectorXd & eigen_path_z,
+                    rviz_visual_tools::colors color,
+                    rviz_visual_tools::scales scale,
+                    const std::string & ns){
+
+  geometry_msgs::Point temp;
+  geometry_msgs::Point first;
+  std::vector<geometry_msgs::Point> trajectory;
+  int points_num = eigen_path_x.rows();
+
+  for (std::size_t i = 0; i < points_num; ++i)
+    {
+      temp.x = eigen_path_x(i);
+      temp.y = eigen_path_y(i);
+      temp.z = eigen_path_z(i);
+
+      if (i == 0)
+      {
+        first = temp;
+      }
+
+      trajectory.push_back(temp);
+    }
+
+  trajectory.push_back(first);
+
+  //publishSphere(first, rviz_visual_tools::RED_, rviz_visual_tools::XXXXLARGE, "initial_point");
+  //publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
+  publishPath(trajectory, color, scale, ns);
+}
+
+bool RvizPolygonsTools::publishPolyhedronWithSurface(Eigen::VectorXd & eigen_path_x,
+                    Eigen::VectorXd & eigen_path_y,
+                    Eigen::VectorXd & eigen_path_z,
+                    rviz_visual_tools::colors surface_color,
+                    rviz_visual_tools::scales scale,
+                    const std::string & ns){
+
+  rviz_visual_tools::colors edge_color = rviz_visual_tools::colors::BLACK;
+  geometry_msgs::Point current;
+  geometry_msgs::Point first;
+  //Eigen::Vector3d next;
+  Eigen::Vector3d average;
+  std::vector<geometry_msgs::Point> trajectory;
+  int points_num = eigen_path_x.rows();
+  average(0) = 0.0;
+  average(1) = 0.0;
+  average(2) = 0.0;
+
+  for (std::size_t i = 0; i < points_num; ++i)
+    {
+      current.x = eigen_path_x(i);
+      current.y = eigen_path_y(i);
+      current.z = eigen_path_z(i);
+
+      average(0) += eigen_path_x(i);
+      average(1) += eigen_path_y(i);
+      average(2) += eigen_path_z(i);
+
+      if (i == 0)
+      {
+        first = current;
+      }
+
+      trajectory.push_back(current);
+    }
+
+  average(0) /= (double)points_num;
+  average(1) /= (double)points_num;
+  average(2) /= (double)points_num;
+  //std::cout<<"average "<<average.transpose()<<std::endl;
+  //std::cout<<"points num "<<points_num<<std::endl;
+  //std::cout<<"path x "<<eigen_path_x.transpose()<<std::endl;
+  //std::cout<<"path y "<<eigen_path_y.transpose()<<std::endl;
+  //std::cout<<"path z "<<eigen_path_z.transpose()<<std::endl;
+  trajectory.push_back(first);
+
+  for (int i = 0; i < points_num-1; ++i)
+  {
+      Eigen::Vector3d temp;
+      Eigen::Vector3d next;
+      temp(0) = eigen_path_x(i);
+      temp(1) = eigen_path_y(i);
+      temp(2) = eigen_path_z(i);
+      next(0) = eigen_path_x(i+1);
+      next(1) = eigen_path_y(i+1);
+      next(2) = eigen_path_z(i+1);
+      //std::cout<<"tmp "<<temp.transpose()<<std::endl;
+      //std::cout<<next.transpose()<<std::endl;
+      publishTriangle(average, temp, next, false, surface_color);
+  }
+
+  publishPath(trajectory, edge_color, scale, ns);
 }
 
 bool RvizPolygonsTools::publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
@@ -112,6 +233,18 @@ bool RvizPolygonsTools::publishTriangle(const geometry_msgs::Pose& pose, rviz_vi
   return publishMarker(triangle_marker_);
 }
 
+bool RvizPolygonsTools::publishTriangle(Eigen::Vector3d v1,
+                                        Eigen::Vector3d v2,
+                                        Eigen::Vector3d v3,
+                                        bool frame_flag,
+                                        rviz_visual_tools::colors color,
+                                        double scale)
+{
+    Eigen::Affine3d pose;
+    pose = Eigen::AngleAxisd(0.0, Eigen::Vector3d::UnitY());
+    pose.translation() = Eigen::Vector3d(0.0, 0.0, 0.0); // translate x,y,z
+    return publishTriangle(convertPose(pose), v1, v2, v3, frame_flag, color, scale);
+}
 
 bool RvizPolygonsTools::publishTriangle(const Eigen::Affine3d& pose, 
                                         Eigen::Vector3d v1,
@@ -304,6 +437,26 @@ bool RvizPolygonsTools::publishQuadrilateralFrame(const geometry_msgs::Pose& pos
   return publishPath(points, color, scale, ns);
 }
 
+bool RvizPolygonsTools::publishHexahedron(const Eigen::Affine3d& pose,
+                                          Eigen::Matrix<double, 3, 8> force_polygon,
+                                          bool frame_flag,
+                                          rviz_visual_tools::colors color,
+                                          double scale)
+{
+    return publishHexahedron(pose,
+                             force_polygon.block(0,0,3,1),
+                             force_polygon.block(0,1,3,1),
+                             force_polygon.block(0,2,3,1),
+                             force_polygon.block(0,3,3,1),
+                             force_polygon.block(0,4,3,1),
+                             force_polygon.block(0,5,3,1),
+                             force_polygon.block(0,6,3,1),
+                             force_polygon.block(0,7,3,1),
+                             frame_flag,
+                             color,
+                             scale);
+}
+
 bool RvizPolygonsTools::publishHexahedron(const Eigen::Affine3d& pose, 
                                         Eigen::Vector3d v1,
                                         Eigen::Vector3d v2,
@@ -333,10 +486,10 @@ bool RvizPolygonsTools::publishHexahedron(const geometry_msgs::Pose& pose,
                                         rviz_visual_tools::colors color,  
                                         double scale){
 
-  //// plane 1
+  //    // plane 1
   publishQuadrilateral(pose, v1, v2, v3, v4, frame_flag, color, scale);
 
-  //// plane 2
+  //    // plane 2
   publishQuadrilateral(pose, v5, v6, v7, v8, frame_flag, color, scale);
 
   //  // plane 3

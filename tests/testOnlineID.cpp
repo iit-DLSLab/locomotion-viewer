@@ -5,12 +5,12 @@
  *      Author: Romeo Orsolino
  */
 #include <locomotion-viewer/RvizMarkersPub.h>
-#include <locomotion-viewer/ParticleFilter.h>
+//#include <locomotion-viewer/ParticleFilter.h>
 
 
 int main(int argc, char** argv)
 {
-    NormalDistribution nd;
+    //NormalDistribution nd;
 
     // For visualizing things in rviz
     ros::init(argc, argv, "triangles");
@@ -179,7 +179,7 @@ int main(int argc, char** argv)
     //
     //// Publish arrow vector of pose
     //ROS_INFO_STREAM_NAMED("test","Publishing Arrow");
-    ////visual_poly_->publishXYPlane(pose, rviz_visual_tools::RED, rviz_visual_tools::LARGE);
+    ////visual_poly_->publishXYPlane(pose, rviz_visual_tools::RED_, rviz_visual_tools::LARGE);
 //
     ////visual_poly_->publishArrow(pose, rviz_visual_tools::GREEN, rviz_visual_tools::LARGE);
     //
