@@ -53,6 +53,11 @@ public:
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");
 
+  bool publishEigenSphere(Eigen::Vector3d & point,
+                                              rviz_visual_tools::colors color = rviz_visual_tools::GREEN_,
+                                              rviz_visual_tools::scales scale = rviz_visual_tools::XLARGE,
+                                              const std::string & ns = "point");
+
   bool publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
                                               Eigen::VectorXd & eigen_path_y,
                                               Eigen::VectorXd & eigen_path_z,

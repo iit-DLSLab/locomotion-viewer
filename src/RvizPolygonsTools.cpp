@@ -166,6 +166,19 @@ bool RvizPolygonsTools::publishPolyhedronWithSurface(Eigen::VectorXd & eigen_pat
   publishPath(trajectory, edge_color, scale, ns);
 }
 
+bool RvizPolygonsTools::publishEigenSphere(Eigen::Vector3d & point,
+                                            rviz_visual_tools::colors color,
+                                            rviz_visual_tools::scales scale,
+                                            const std::string & ns)
+{
+    geometry_msgs::Point temp;
+    temp.x = point(0);
+    temp.y = point(1);
+    temp.z = point(2);
+
+    publishSphere(temp, color, scale, "com");
+}
+
 bool RvizPolygonsTools::publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
                                             Eigen::VectorXd & eigen_path_y,
                                             Eigen::VectorXd & eigen_path_z,
