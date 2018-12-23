@@ -205,7 +205,7 @@ bool RvizPolygonsTools::publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
 
       trajectory.push_back(temp);
     }
-  publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
+  publishSpheres(trajectory, color, scale, "intermediate_points");
 }
 
 bool RvizPolygonsTools::publishTriangle(const Eigen::Affine3d& pose, rviz_visual_tools::colors color, double scale)
@@ -519,6 +519,47 @@ bool RvizPolygonsTools::publishHexahedron(const geometry_msgs::Pose& pose,
 
   return publishMarker(triangle_marker_);
 }
+
+bool RvizPolygonsTools::publishDashedLine(Eigen::Vector3d& startingPoint,
+                                          Eigen::Vector3d& endPoint,
+                                          rviz_visual_tools::colors color,
+                                          rviz_visual_tools::scales scale){
+    std::cout<<"start building dashed line"<<std::endl;
+    double segmentsLenght = 0.1;
+    double distance;
+    distance = sqrt((startingPoint(0) - endPoint(0))*(startingPoint(0) - endPoint(0)) +
+                    (startingPoint(1) - endPoint(1))*(startingPoint(1) - endPoint(1)) +
+                    (startingPoint(2) - endPoint(2))*(startingPoint(2) - endPoint(2)));
+    Eigen::Vector3d direction = endPoint - startingPoint;
+    direction.normalize();
+
+    std::cout<<"distance = "<<distance<<std::endl;
+    Eigen::Vector3d start, end;
+    start = startingPoint;
+    end = startingPoint;
+    end += direction*segmentsLenght;
+    int numberOfSegments = ceil(distance/(2.0*segmentsLenght));
+
+    for (int i = 0; i<numberOfSegments; i++){
+        start = startingPoint;
+        start += 2.0*double(i)*direction*segmentsLenght;
+
+        end = start;
+        end += direction*segmentsLenght;
+        double tmpDistance = sqrt((startingPoint(0) - end(0))*(startingPoint(0) - end(0)) +
+                                  (startingPoint(1) - end(1))*(startingPoint(1) - end(1)) +
+                                  (startingPoint(2) - end(2))*(startingPoint(2) - end(2)));
+        if (tmpDistance>distance){
+            end = endPoint;
+        }
+        const Eigen::Vector3d p1 = start;
+        const Eigen::Vector3d p2 = end;
+        publishCylinder(p1, p2);
+    }
+    std::cout<<"finished building dashed line"<<std::endl;
+    return true;
+}
+
 
 
 //}  // namespace rviz_visual_tools

@@ -159,6 +159,11 @@ public:
                                         rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
                                         double scale = 1.0);
 
+  bool publishDashedLine(Eigen::Vector3d& startingPoint,
+                         Eigen::Vector3d& endPoint,
+                         rviz_visual_tools::colors color = rviz_visual_tools::BLACK,
+                         rviz_visual_tools::scales scale = rviz_visual_tools::XLARGE);
+
   typedef RvizVisualTools RvizVisual;
 
 private:
