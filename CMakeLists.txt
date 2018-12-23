@@ -31,3 +31,19 @@ set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-std=c++0x -o3")
 #add_executable(test_online_id tests/testOnlineID.cpp)
 #target_link_libraries(test_online_id ${PROJECT_NAME})
 #set_target_properties(test_online_id PROPERTIES COMPILE_FLAGS "-std=c++11 -o3" RUNTIME_OUTPUT_DIRECTORY #"${CMAKE_CURRENT_SOURCE_DIR}/bin")
+
+
+# Install libraries
+
+
+install(DIRECTORY include/${PROJECT_NAME}/
+        DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+
+install(TARGETS ${PROJECT_NAME}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  )
+
+install(FILES package.xml
+DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
