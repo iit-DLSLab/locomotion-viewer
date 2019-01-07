@@ -69,7 +69,7 @@ bool RvizPolygonsTools::publishEigenPathWithWayPoints(Eigen::VectorXd & eigen_pa
   publishPath(trajectory, color, scale, ns);
 }
 
-bool RvizPolygonsTools::publishPolyhedronPerimeter(Eigen::VectorXd & eigen_path_x,
+bool RvizPolygonsTools::publishPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
                     rviz_visual_tools::colors color,
@@ -102,7 +102,7 @@ bool RvizPolygonsTools::publishPolyhedronPerimeter(Eigen::VectorXd & eigen_path_
   publishPath(trajectory, color, scale, ns);
 }
 
-bool RvizPolygonsTools::publishPolyhedronWithSurface(Eigen::VectorXd & eigen_path_x,
+bool RvizPolygonsTools::publishPolygonWithSurface(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
                     rviz_visual_tools::colors surface_color,
@@ -522,10 +522,10 @@ bool RvizPolygonsTools::publishHexahedron(const geometry_msgs::Pose& pose,
 
 bool RvizPolygonsTools::publishDashedLine(Eigen::Vector3d& startingPoint,
                                           Eigen::Vector3d& endPoint,
+                                          double segmentsLenght,
                                           rviz_visual_tools::colors color,
                                           rviz_visual_tools::scales scale){
     std::cout<<"start building dashed line"<<std::endl;
-    double segmentsLenght = 0.1;
     double distance;
     distance = sqrt((startingPoint(0) - endPoint(0))*(startingPoint(0) - endPoint(0)) +
                     (startingPoint(1) - endPoint(1))*(startingPoint(1) - endPoint(1)) +
@@ -554,10 +554,45 @@ bool RvizPolygonsTools::publishDashedLine(Eigen::Vector3d& startingPoint,
         }
         const Eigen::Vector3d p1 = start;
         const Eigen::Vector3d p2 = end;
-        publishCylinder(p1, p2);
+        publishCylinder(p1, p2, color, scale);
     }
     std::cout<<"finished building dashed line"<<std::endl;
     return true;
+}
+
+bool RvizPolygonsTools::publishDashedPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
+                    Eigen::VectorXd & eigen_path_y,
+                    Eigen::VectorXd & eigen_path_z,
+                    double segmentsLenght,
+                    rviz_visual_tools::colors lineColor,
+                    rviz_visual_tools::scales lineScale,
+                    const std::string & ns){
+
+  Eigen::Vector3d current, next;
+  int points_num = eigen_path_x.rows();
+
+  for (std::size_t i = 0; i < points_num; i++)
+    {
+      current.setZero(); next.setZero();
+      current(0) = eigen_path_x(i);
+      current(1) = eigen_path_y(i);
+      current(2) = eigen_path_z(i);
+
+      if (i == points_num-1)
+      {
+          next(0) = eigen_path_x(0);
+          next(1) = eigen_path_y(0);
+          next(2) = eigen_path_z(0);
+      }else{
+          next(0) = eigen_path_x(i+1);
+          next(1) = eigen_path_y(i+1);
+          next(2) = eigen_path_z(i+1);
+      }
+
+    publishDashedLine(current, next, segmentsLenght, lineColor, lineScale);
+
+  }
+
 }
 
 

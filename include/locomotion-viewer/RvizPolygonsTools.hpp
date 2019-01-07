@@ -39,14 +39,22 @@ public:
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");   
 
-  bool publishPolyhedronPerimeter(Eigen::VectorXd & eigen_path_x,
+  bool publishDashedPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
+                    Eigen::VectorXd & eigen_path_y,
+                    Eigen::VectorXd & eigen_path_z,
+                    double segmentsLenght = 0.05,
+                    rviz_visual_tools::colors lineColor = rviz_visual_tools::BLACK,
+                    rviz_visual_tools::scales lineScale = rviz_visual_tools::MEDIUM,
+                    const std::string & ns = "Path");
+
+  bool publishPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
                     rviz_visual_tools::colors color = rviz_visual_tools::RED_,
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");
 
-  bool publishPolyhedronWithSurface(Eigen::VectorXd & eigen_path_x,
+  bool publishPolygonWithSurface(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
                     rviz_visual_tools::colors color = rviz_visual_tools::RED_,
@@ -161,6 +169,7 @@ public:
 
   bool publishDashedLine(Eigen::Vector3d& startingPoint,
                          Eigen::Vector3d& endPoint,
+                         double segmentsLenght = 0.1,
                          rviz_visual_tools::colors color = rviz_visual_tools::BLACK,
                          rviz_visual_tools::scales scale = rviz_visual_tools::XLARGE);
 
