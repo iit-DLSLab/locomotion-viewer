@@ -61,17 +61,22 @@ public:
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");
 
-  bool publishEigenSphere(Eigen::Vector3d & point,
-                                              rviz_visual_tools::colors color = rviz_visual_tools::GREEN_,
-                                              rviz_visual_tools::scales scale = rviz_visual_tools::XLARGE,
-                                              const std::string & ns = "point");
+  bool publishEigenCube(const Eigen::Vector3d& center, rviz_visual_tools::colors color, const double side_size = 0.05, const std::string & ns = "Cube");
+
+  bool publishCube(const geometry_msgs::Point& center, const double& side_size,
+                                      rviz_visual_tools::colors color, const std::string& ns, std::size_t id = 0);
 
   bool publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
                                               Eigen::VectorXd & eigen_path_y,
                                               Eigen::VectorXd & eigen_path_z,
                                               rviz_visual_tools::colors color,
                                               rviz_visual_tools::scales scale,
-                                              const std::string & ns);
+                                              const std::string & ns = "Spheres");
+
+  bool publishEigenSphere(Eigen::Vector3d & point,
+                          rviz_visual_tools::colors color = rviz_visual_tools::GREEN_,
+                          rviz_visual_tools::scales scale = rviz_visual_tools::XLARGE,
+                          const std::string & ns = "Sphere");
 
   bool publishTriangle(Eigen::Vector3d v1,
                                         Eigen::Vector3d v2,

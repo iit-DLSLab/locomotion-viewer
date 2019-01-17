@@ -525,7 +525,7 @@ bool RvizPolygonsTools::publishDashedLine(Eigen::Vector3d& startingPoint,
                                           double segmentsLenght,
                                           rviz_visual_tools::colors color,
                                           rviz_visual_tools::scales scale){
-    std::cout<<"start building dashed line"<<std::endl;
+    //std::cout<<"start building dashed line"<<std::endl;
     double distance;
     distance = sqrt((startingPoint(0) - endPoint(0))*(startingPoint(0) - endPoint(0)) +
                     (startingPoint(1) - endPoint(1))*(startingPoint(1) - endPoint(1)) +
@@ -533,7 +533,7 @@ bool RvizPolygonsTools::publishDashedLine(Eigen::Vector3d& startingPoint,
     Eigen::Vector3d direction = endPoint - startingPoint;
     direction.normalize();
 
-    std::cout<<"distance = "<<distance<<std::endl;
+    //std::cout<<"distance = "<<distance<<std::endl;
     Eigen::Vector3d start, end;
     start = startingPoint;
     end = startingPoint;
@@ -556,7 +556,7 @@ bool RvizPolygonsTools::publishDashedLine(Eigen::Vector3d& startingPoint,
         const Eigen::Vector3d p2 = end;
         publishCylinder(p1, p2, color, scale);
     }
-    std::cout<<"finished building dashed line"<<std::endl;
+    //std::cout<<"finished building dashed line"<<std::endl;
     return true;
 }
 
@@ -595,6 +595,60 @@ bool RvizPolygonsTools::publishDashedPolygonPerimeter(Eigen::VectorXd & eigen_pa
 
 }
 
+bool RvizPolygonsTools::publishCube(const geometry_msgs::Point& center, const double& side_size,
+                                    rviz_visual_tools::colors color, const std::string& ns, std::size_t id)
+{
+  // Set the timestamp
+  cuboid_marker_.header.stamp = ros::Time::now();
+  cuboid_marker_.ns = ns;
 
+  if (id == 0)
+  {  // Provide a new id every call to this function
+    cuboid_marker_.id++;
+  }
+  else
+  {  // allow marker to be overwritten
+    cuboid_marker_.id = id;
+  }
+
+  cuboid_marker_.color = getColor(color);
+
+  // Calculate center pose
+  geometry_msgs::Pose pose;
+  pose.position.y = center.y;
+  pose.position.x = center.x;
+  pose.position.z = center.z;
+  cuboid_marker_.pose = pose;
+
+  // Calculate scale
+  cuboid_marker_.scale.x = side_size;
+  cuboid_marker_.scale.y = side_size;
+  cuboid_marker_.scale.z = side_size;
+
+  // Prevent scale from being zero
+  if (cuboid_marker_.scale.x == 0.0)
+  {
+    cuboid_marker_.scale.x = rviz_visual_tools::SMALL_SCALE;
+  }
+  if (cuboid_marker_.scale.y == 0.0)
+  {
+    cuboid_marker_.scale.y = rviz_visual_tools::SMALL_SCALE;
+  }
+  if (cuboid_marker_.scale.z == 0.0)
+  {
+    cuboid_marker_.scale.z = rviz_visual_tools::SMALL_SCALE;
+  }
+
+  // Helper for publishing rviz markers
+  return publishMarker(cuboid_marker_);
+}
+
+bool RvizPolygonsTools::publishEigenCube(const Eigen::Vector3d& center,
+                                         rviz_visual_tools::colors color,
+                                         const double side_size,
+                                         const std::string & ns)
+{
+  return publishCube(convertPoint(center), side_size, color, ns);
+}
 
 //}  // namespace rviz_visual_tools
