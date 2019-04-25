@@ -8,6 +8,7 @@ stages:
 variables:
    TAG: stable
    GIT_STRATEGY: clone
+   VERSION_BASED_ON_GIT_TAG: "true"
 
 before_script:
     - bash /root/dls_gitlab_ci/gitlab-script.sh
