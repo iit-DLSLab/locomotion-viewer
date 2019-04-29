@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>locomotion-viewer</name>
+  <name>locomotion_viewer</name>
   <version>0.0.1</version>
   <description>identify trunk CoM position without stopping the execution of the current task</description>
 
