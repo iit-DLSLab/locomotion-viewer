@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <random>
-#include "locomotion-viewer/NormalDistribution.h"
+#include "locomotion_viewer/NormalDistribution.h"
 
 class ParticleFilter {
 

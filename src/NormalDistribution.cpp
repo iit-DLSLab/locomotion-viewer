@@ -5,7 +5,7 @@
  *      Author: Romeo Orsolino
  */
 
-#include "../include/locomotion-viewer/NormalDistribution.h"
+#include "../include/locomotion_viewer/NormalDistribution.h"
 
 
 NormalDistribution::NormalDistribution()
