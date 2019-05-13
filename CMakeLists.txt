@@ -25,14 +25,7 @@ add_library(${PROJECT_NAME} src/RvizMarkersPub.cpp
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-std=c++0x -o3")     
-
-install(TARGETS ${PROJECT_NAME}
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-  )
-
-                           
+                         
 #add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencpp)
 
 #add_executable(test_online_id tests/testOnlineID.cpp)
