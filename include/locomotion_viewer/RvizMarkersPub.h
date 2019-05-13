@@ -12,8 +12,8 @@
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <Eigen/Dense>
-#include <locomotion-viewer/Geometry.hpp>
-#include <locomotion-viewer/RvizPolygonsTools.hpp>
+#include <locomotion_viewer/Geometry.hpp>
+#include <locomotion_viewer/RvizPolygonsTools.hpp>
 
 
 class RvizMarkersPub {

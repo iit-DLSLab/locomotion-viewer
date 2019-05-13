@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(locomotion-viewer)
+project(locomotion_viewer)
 
 find_package(catkin REQUIRED
   roscpp
@@ -25,6 +25,13 @@ add_library(${PROJECT_NAME} src/RvizMarkersPub.cpp
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-std=c++0x -o3")     
+
+install(TARGETS ${PROJECT_NAME}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  )
+
                            
 #add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencpp)
 
@@ -33,17 +40,19 @@ set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-std=c++0x -o3")
 #set_target_properties(test_online_id PROPERTIES COMPILE_FLAGS "-std=c++11 -o3" RUNTIME_OUTPUT_DIRECTORY #"${CMAKE_CURRENT_SOURCE_DIR}/bin")
 
 
-# Install libraries
-
-
+# Install header files
 install(DIRECTORY include/${PROJECT_NAME}/
         DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 
+# Install xml plugin config
+install(FILES package.xml
+DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+# Install libraries
 install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
 
-install(FILES package.xml
-DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
