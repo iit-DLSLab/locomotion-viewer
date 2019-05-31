@@ -33,7 +33,7 @@ bool RvizPolygonsTools::publishEigenPath(Eigen::VectorXd & eigen_path_x,
       trajectory.push_back(temp);
     }
 
-  //publishSphere(first, rviz_visual_tools::RED_, rviz_visual_tools::XXXXLARGE, "initial_point");
+  //publishSphere(first, rviz_visual_tools::RED, rviz_visual_tools::XXXXLARGE, "initial_point");
   //publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
   publishPath(trajectory, color, scale, ns);
 }
@@ -64,7 +64,7 @@ bool RvizPolygonsTools::publishEigenPathWithWayPoints(Eigen::VectorXd & eigen_pa
       trajectory.push_back(temp);
     }
 
-  publishSphere(first, rviz_visual_tools::RED_, rviz_visual_tools::XXXXLARGE, "initial_point");
+  publishSphere(first, rviz_visual_tools::RED, rviz_visual_tools::XXXXLARGE, "initial_point");
   publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
   publishPath(trajectory, color, scale, ns);
 }
@@ -97,7 +97,7 @@ bool RvizPolygonsTools::publishPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
 
   trajectory.push_back(first);
 
-  //publishSphere(first, rviz_visual_tools::RED_, rviz_visual_tools::XXXXLARGE, "initial_point");
+  //publishSphere(first, rviz_visual_tools::RED, rviz_visual_tools::XXXXLARGE, "initial_point");
   //publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
   publishPath(trajectory, color, scale, ns);
 }

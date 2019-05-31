@@ -28,14 +28,14 @@ public:
   bool publishEigenPath(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
-                    rviz_visual_tools::colors color = rviz_visual_tools::RED_,
+                    rviz_visual_tools::colors color = rviz_visual_tools::RED,
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");
 
   bool publishEigenPathWithWayPoints(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
-                    rviz_visual_tools::colors color = rviz_visual_tools::RED_,
+                    rviz_visual_tools::colors color = rviz_visual_tools::RED,
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");   
 
@@ -50,14 +50,14 @@ public:
   bool publishPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
-                    rviz_visual_tools::colors color = rviz_visual_tools::RED_,
+                    rviz_visual_tools::colors color = rviz_visual_tools::RED,
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");
 
   bool publishPolygonWithSurface(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
-                    rviz_visual_tools::colors color = rviz_visual_tools::RED_,
+                    rviz_visual_tools::colors color = rviz_visual_tools::RED,
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");
 
@@ -74,7 +74,7 @@ public:
                                               const std::string & ns = "Spheres");
 
   bool publishEigenSphere(Eigen::Vector3d & point,
-                          rviz_visual_tools::colors color = rviz_visual_tools::GREEN_,
+                          rviz_visual_tools::colors color = rviz_visual_tools::GREEN,
                           rviz_visual_tools::scales scale = rviz_visual_tools::XLARGE,
                           const std::string & ns = "Sphere");
 
