@@ -64,8 +64,15 @@ bool RvizPolygonsTools::publishEigenPathWithWayPoints(Eigen::VectorXd & eigen_pa
       trajectory.push_back(temp);
     }
 
-  publishSphere(first, color, scale, "initial_point");
-  publishSpheres(trajectory, color, scale, "intermediate_points");
+  rviz_visual_tools::scales points_size;
+  if (static_cast<rviz_visual_tools::scales>(scale) < 11){
+      points_size = static_cast<rviz_visual_tools::scales>(scale + 1);
+  }else{
+      points_size = scale;
+  }
+
+  publishSphere(first, color, points_size, "initial_point");
+  publishSpheres(trajectory, color, points_size, "intermediate_points");
   publishPath(trajectory, color, scale, ns);
 }
 
