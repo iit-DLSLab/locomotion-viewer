@@ -39,6 +39,14 @@ public:
                     rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                     const std::string & ns = "Path");   
 
+  bool publishDashedEigenPath(Eigen::VectorXd & eigen_path_x,
+                    Eigen::VectorXd & eigen_path_y,
+                    Eigen::VectorXd & eigen_path_z,
+                    double segmentsLenght = 0.05,
+                    rviz_visual_tools::colors lineColor = rviz_visual_tools::BLACK,
+                    rviz_visual_tools::scales lineScale = rviz_visual_tools::MEDIUM,
+                    const std::string & ns = "Path");
+
   bool publishDashedPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,

@@ -569,6 +569,34 @@ bool RvizPolygonsTools::publishDashedLine(Eigen::Vector3d& startingPoint,
     return true;
 }
 
+bool RvizPolygonsTools::publishDashedEigenPath(Eigen::VectorXd & eigen_path_x,
+                                                      Eigen::VectorXd & eigen_path_y,
+                                                      Eigen::VectorXd & eigen_path_z,
+                                                      double segmentsLenght,
+                                                      rviz_visual_tools::colors lineColor,
+                                                      rviz_visual_tools::scales lineScale,
+                                                      const std::string & ns){
+
+    Eigen::Vector3d current, next;
+    int points_num = eigen_path_x.rows();
+
+    for (std::size_t i = 0; i < points_num - 1; i++)
+    {
+        current.setZero(); next.setZero();
+        current(0) = eigen_path_x(i);
+        current(1) = eigen_path_y(i);
+        current(2) = eigen_path_z(i);
+
+        next(0) = eigen_path_x(i+1);
+        next(1) = eigen_path_y(i+1);
+        next(2) = eigen_path_z(i+1);
+
+        publishDashedLine(current, next, segmentsLenght, lineColor, lineScale);
+
+    }
+
+}
+
 bool RvizPolygonsTools::publishDashedPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
                     Eigen::VectorXd & eigen_path_z,
