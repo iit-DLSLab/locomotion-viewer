@@ -208,9 +208,11 @@ bool RvizPolygonsTools::publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
   publishSpheres(trajectory, color, scale, "intermediate_points");
 }
 
-bool RvizPolygonsTools::publishTriangle(const Eigen::Isometry3d &pose, rviz_visual_tools::colors color, double scale)
+bool RvizPolygonsTools::publishTriangle(const Eigen::Isometry3d& pose, rviz_visual_tools::colors color, double scale)
 {
-   return publishTriangle(convertPose(pose), color, scale);
+    geometry_msgs::Pose geom_pose;
+    geom_pose = convertPose(pose);
+   return publishTriangle(geom_pose, color, scale);
 }
 
 bool RvizPolygonsTools::publishTriangle(const geometry_msgs::Pose& pose, rviz_visual_tools::colors color, double scale){
@@ -254,7 +256,6 @@ bool RvizPolygonsTools::publishTriangle(Eigen::Vector3d v1,
                                         double scale)
 {
     Eigen::Isometry3d pose;
-
     pose = Eigen::AngleAxisd(0.0, Eigen::Vector3d::UnitY());
     pose.translation() = Eigen::Vector3d(0.0, 0.0, 0.0); // translate x,y,z
     return publishTriangle(convertPose(pose), v1, v2, v3, frame_flag, color, scale);

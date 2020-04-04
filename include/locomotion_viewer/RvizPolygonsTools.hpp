@@ -146,6 +146,7 @@ public:
                                             rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,
                                             double scale = 1.0);
 
+
   bool publishHexahedron(const Eigen::Isometry3d& pose,
                                         Eigen::Vector3d v1,
                                         Eigen::Vector3d v2,
