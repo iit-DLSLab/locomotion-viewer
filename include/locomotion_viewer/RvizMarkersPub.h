@@ -70,7 +70,7 @@ public:
 
 private:
 
-  	std::default_random_engine  generator;
+    //std::default_random_engine  generator;
     visualization_msgs::Marker avg_particle_marker, com_marker;
     Eigen::MatrixXd particles_;
     Eigen::Matrix<Eigen::MatrixXd, 10, 1> particles_array;

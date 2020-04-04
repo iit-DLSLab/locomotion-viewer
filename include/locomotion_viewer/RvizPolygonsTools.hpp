@@ -85,7 +85,7 @@ public:
                                         rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,
                                         double scale = 1.0);
 
-  bool publishTriangle(const Eigen::Affine3d& pose,
+  bool publishTriangle(const Eigen::Isometry3d& pose,
                                         Eigen::Vector3d v1,
                                         Eigen::Vector3d v2,
                                         Eigen::Vector3d v3,
@@ -109,7 +109,7 @@ public:
                                         double scale = 0.02,
                                         const std::string & ns = "triangle_frame");
   
-  bool publishTriangle(const Eigen::Affine3d& pose, rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT, double scale = 1.0);
+  bool publishTriangle(const Eigen::Isometry3d& pose, rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT, double scale = 1.0);
   
   bool publishTriangle(const geometry_msgs::Pose& pose, rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT, double scale = 1.0);
 
@@ -122,7 +122,7 @@ public:
                                         double scale = 0.02,
                                         const std::string & ns = "triangle_frame");
 
-  bool publishQuadrilateral(const Eigen::Affine3d& pose, 
+  bool publishQuadrilateral(const Eigen::Isometry3d& pose, 
                                         Eigen::Vector3d v1,
                                         Eigen::Vector3d v2,
                                         Eigen::Vector3d v3,
@@ -140,13 +140,13 @@ public:
                                         rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
                                         double scale = 1.0);
 
-  bool publishHexahedron(const Eigen::Affine3d& pose,
+  bool publishHexahedron(const Eigen::Isometry3d& pose,
                                             Eigen::Matrix<double, 3, 8> force_polygon,
                                             bool frame_flag = true,
                                             rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,
                                             double scale = 1.0);
 
-  bool publishHexahedron(const Eigen::Affine3d& pose, 
+  bool publishHexahedron(const Eigen::Isometry3d& pose, 
                                         Eigen::Vector3d v1,
                                         Eigen::Vector3d v2,
                                         Eigen::Vector3d v3,
