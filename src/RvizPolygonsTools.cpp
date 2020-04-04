@@ -64,8 +64,8 @@ bool RvizPolygonsTools::publishEigenPathWithWayPoints(Eigen::VectorXd & eigen_pa
       trajectory.push_back(temp);
     }
 
-  publishSphere(first, rviz_visual_tools::RED, rviz_visual_tools::XXXXLARGE, "initial_point");
-  publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
+  publishSphere(first, color, scale, "initial_point");
+  publishSpheres(trajectory, color, scale, "intermediate_points");
   publishPath(trajectory, color, scale, ns);
 }
 
@@ -524,6 +524,7 @@ bool RvizPolygonsTools::publishHexahedron(const geometry_msgs::Pose& pose,
 bool RvizPolygonsTools::publishDashedLine(Eigen::Vector3d& startingPoint,
                                           Eigen::Vector3d& endPoint,
                                           double segmentsLenght,
+                                          rviz_visual_tools::colors color,
                                           rviz_visual_tools::colors color,
                                           rviz_visual_tools::scales scale){
     //std::cout<<"start building dashed line"<<std::endl;
