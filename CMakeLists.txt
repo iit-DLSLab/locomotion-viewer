@@ -24,13 +24,6 @@ add_library(${PROJECT_NAME} src/RvizPolygonsTools.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-std=c++0x -o3")     
-                         
-#add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencpp)
-
-#add_executable(test_online_id tests/testOnlineID.cpp)
-#target_link_libraries(test_online_id ${PROJECT_NAME})
-#set_target_properties(test_online_id PROPERTIES COMPILE_FLAGS "-std=c++11 -o3" RUNTIME_OUTPUT_DIRECTORY #"${CMAKE_CURRENT_SOURCE_DIR}/bin")
-
 
 # Install header files
 install(DIRECTORY include/${PROJECT_NAME}/
