@@ -526,7 +526,6 @@ bool RvizPolygonsTools::publishDashedLine(Eigen::Vector3d& startingPoint,
                                           Eigen::Vector3d& endPoint,
                                           double segmentsLenght,
                                           rviz_visual_tools::colors color,
-                                          rviz_visual_tools::colors color,
                                           rviz_visual_tools::scales scale){
     //std::cout<<"start building dashed line"<<std::endl;
     double distance;
