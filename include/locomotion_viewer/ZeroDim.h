@@ -1,5 +1,5 @@
 //
-// Created by rorsolino on 06/04/2020.
+// Created by Romeo Orsolino on 06/04/2020.
 //
 
 #ifndef LOCOMOTION_VIEWER_ZERODIM_H

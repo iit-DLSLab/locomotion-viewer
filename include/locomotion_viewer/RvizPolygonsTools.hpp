@@ -8,15 +8,16 @@
 #ifndef RVIZPOLYGONSTOOLS_H_
 #define RVIZPOLYGONSTOOLS_H_
 
-#include <locomotion_viewer/OneDim.h>
+#include <locomotion_viewer/ThreeDim.h>
 
 #include <Eigen/Dense>
 #include <iostream>
 #include <string>
 #include <chrono>
 
-//namespace rviz_visual_tools{
-class RvizPolygonsTools: public locomotion_viewer::OneDim {
+namespace locomotion_viewer{
+
+    class RvizPolygonsTools: public locomotion_viewer::ThreeDim {
 
 public:
 
@@ -25,128 +26,6 @@ public:
                   ros::NodeHandle nh);
 
   ~RvizPolygonsTools();
-
-  bool publishDashedPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
-                    Eigen::VectorXd & eigen_path_y,
-                    Eigen::VectorXd & eigen_path_z,
-                    double segmentsLenght = 0.05,
-                    rviz_visual_tools::colors lineColor = rviz_visual_tools::BLACK,
-                    rviz_visual_tools::scales lineScale = rviz_visual_tools::MEDIUM,
-                    const std::string & ns = "Path");
-
-  bool publishPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
-                    Eigen::VectorXd & eigen_path_y,
-                    Eigen::VectorXd & eigen_path_z,
-                    rviz_visual_tools::colors color = rviz_visual_tools::RED,
-                    rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
-                    const std::string & ns = "Path");
-
-  bool publishPolygonWithSurface(Eigen::VectorXd & eigen_path_x,
-                    Eigen::VectorXd & eigen_path_y,
-                    Eigen::VectorXd & eigen_path_z,
-                    rviz_visual_tools::colors color = rviz_visual_tools::RED,
-                    rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
-                    const std::string & ns = "Path");
-
-  bool publishEigenCube(const Eigen::Vector3d& center, rviz_visual_tools::colors color, const double side_size = 0.05, const std::string & ns = "Cube");
-
-  bool publishCube(const geometry_msgs::Point& center, const double& side_size,
-                                      rviz_visual_tools::colors color, const std::string& ns, std::size_t id = 0);
-
-  bool publishTriangle(Eigen::Vector3d v1,
-                                        Eigen::Vector3d v2,
-                                        Eigen::Vector3d v3,
-                                        bool frame_flag = true,
-                                        rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,
-                                        double scale = 1.0);
-
-  bool publishTriangle(const Eigen::Isometry3d& pose,
-                                        Eigen::Vector3d v1,
-                                        Eigen::Vector3d v2,
-                                        Eigen::Vector3d v3,
-                                        bool frame_flag = true,
-                                        rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
-                                        double scale = 1.0);
-
-  bool publishTriangle(const geometry_msgs::Pose& pose, 
-                                        Eigen::Vector3d v1,
-                                        Eigen::Vector3d v2,
-                                        Eigen::Vector3d v3,
-                                        bool frame_flag = true,
-                                        rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
-                                        double scale = 1.0);
-
-  bool publishTriangleFrame(const geometry_msgs::Pose& pose, 
-                                        Eigen::Vector3d v1,
-                                        Eigen::Vector3d v2,
-                                        Eigen::Vector3d v3,
-                                        rviz_visual_tools::colors color = rviz_visual_tools::BLACK,  
-                                        double scale = 0.02,
-                                        const std::string & ns = "triangle_frame");
-  
-  bool publishTriangle(const Eigen::Isometry3d& pose, rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT, double scale = 1.0);
-  
-  bool publishTriangle(const geometry_msgs::Pose& pose, rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT, double scale = 1.0);
-
-  bool publishQuadrilateralFrame(const geometry_msgs::Pose& pose, 
-                                        Eigen::Vector3d v1,
-                                        Eigen::Vector3d v2,
-                                        Eigen::Vector3d v3,
-                                        Eigen::Vector3d v4,
-                                        rviz_visual_tools::colors color = rviz_visual_tools::BLACK,  
-                                        double scale = 0.02,
-                                        const std::string & ns = "triangle_frame");
-
-  bool publishQuadrilateral(const Eigen::Isometry3d& pose,
-                                        Eigen::Vector3d v1,
-                                        Eigen::Vector3d v2,
-                                        Eigen::Vector3d v3,
-                                        Eigen::Vector3d v4,
-                                        bool frame_flag = true,
-                                        rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
-                                        double scale = 1.0);
-
-  bool publishQuadrilateral(const geometry_msgs::Pose& pose, 
-                                        Eigen::Vector3d v1,
-                                        Eigen::Vector3d v2,
-                                        Eigen::Vector3d v3,
-                                        Eigen::Vector3d v4,
-                                        bool frame_flag = true,
-                                        rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
-                                        double scale = 1.0);
-
-  bool publishHexahedron(const Eigen::Isometry3d& pose,
-                                            Eigen::Matrix<double, 3, 8> force_polygon,
-                                            bool frame_flag = true,
-                                            rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,
-                                            double scale = 1.0);
-
-
-  bool publishHexahedron(const Eigen::Isometry3d& pose,
-                                        Eigen::Vector3d v1,
-                                        Eigen::Vector3d v2,
-                                        Eigen::Vector3d v3,
-                                        Eigen::Vector3d v4,
-                                        Eigen::Vector3d v5,
-                                        Eigen::Vector3d v6,
-                                        Eigen::Vector3d v7,
-                                        Eigen::Vector3d v8,
-                                        bool frame_flag = true,
-                                        rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
-                                        double scale = 1.0);
-
-  bool publishHexahedron(const geometry_msgs::Pose& pose, 
-                                        Eigen::Vector3d v1,
-                                        Eigen::Vector3d v2,
-                                        Eigen::Vector3d v3,
-                                        Eigen::Vector3d v4,
-                                        Eigen::Vector3d v5,
-                                        Eigen::Vector3d v6,
-                                        Eigen::Vector3d v7,
-                                        Eigen::Vector3d v8,
-                                        bool frame_flag = true,
-                                        rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
-                                        double scale = 1.0);
 
   typedef RvizVisualTools RvizVisual;
 
@@ -157,6 +36,6 @@ private:
 
   typedef std::shared_ptr<RvizPolygonsTools> RvizPolygonsToolsPtr;
 
-//} // namespace rviz_visual_tools
+} // namespace locomotion_viewer
 
 #endif /* DLS_ONLINEID_H_ */

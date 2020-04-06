@@ -22,7 +22,9 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 add_library(${PROJECT_NAME}
         src/RvizPolygonsTools.cpp
         src/ZeroDim.cpp
-        src/OneDim.cpp)
+        src/OneDim.cpp
+        src/TwoDim.cpp
+        src/ThreeDim.cpp)
 
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
