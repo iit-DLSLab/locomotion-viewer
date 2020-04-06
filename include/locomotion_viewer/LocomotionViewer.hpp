@@ -17,24 +17,21 @@
 
 namespace locomotion_viewer{
 
-    class RvizPolygonsTools: public locomotion_viewer::ThreeDim {
+    class LocomotionViewer: public locomotion_viewer::ThreeDim {
 
 public:
 
-  RvizPolygonsTools(std::string base_frame, 
-                  std::string marker_topic, 
-                  ros::NodeHandle nh);
+  LocomotionViewer(std::string base_frame,
+                   std::string marker_topic,
+                   ros::NodeHandle nh);
 
-  ~RvizPolygonsTools();
-
-  typedef RvizVisualTools RvizVisual;
+  ~LocomotionViewer();
 
 private:
 
-
 };
 
-  typedef std::shared_ptr<RvizPolygonsTools> RvizPolygonsToolsPtr;
+    typedef std::shared_ptr<LocomotionViewer> LocomotionViewerPtr;
 
 } // namespace locomotion_viewer
 

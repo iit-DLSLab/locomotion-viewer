@@ -20,7 +20,7 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a cpp library
 add_library(${PROJECT_NAME}
-        src/RvizPolygonsTools.cpp
+        src/LocomotionViewer.cpp
         src/ZeroDim.cpp
         src/OneDim.cpp
         src/TwoDim.cpp
