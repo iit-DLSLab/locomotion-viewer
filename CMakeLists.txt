@@ -19,7 +19,10 @@ include_directories(${EIGEN3_INCLUDE_DIRS})
 include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a cpp library
-add_library(${PROJECT_NAME} src/RvizPolygonsTools.cpp)
+add_library(${PROJECT_NAME}
+        src/RvizPolygonsTools.cpp
+        src/ZeroDim.cpp
+        src/OneDim.cpp)
 
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 

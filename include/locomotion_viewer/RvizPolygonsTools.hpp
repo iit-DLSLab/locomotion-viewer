@@ -8,14 +8,15 @@
 #ifndef RVIZPOLYGONSTOOLS_H_
 #define RVIZPOLYGONSTOOLS_H_
 
-#include <rviz_visual_tools/rviz_visual_tools.h>
+#include <locomotion_viewer/OneDim.h>
+
 #include <Eigen/Dense>
 #include <iostream>
 #include <string>
 #include <chrono>
 
 //namespace rviz_visual_tools{
-class RvizPolygonsTools: public rviz_visual_tools::RvizVisualTools {
+class RvizPolygonsTools: public locomotion_viewer::OneDim {
 
 public:
 
@@ -24,28 +25,6 @@ public:
                   ros::NodeHandle nh);
 
   ~RvizPolygonsTools();
-
-  bool publishEigenPath(Eigen::VectorXd & eigen_path_x,
-                    Eigen::VectorXd & eigen_path_y,
-                    Eigen::VectorXd & eigen_path_z,
-                    rviz_visual_tools::colors color = rviz_visual_tools::RED,
-                    rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
-                    const std::string & ns = "Path");
-
-  bool publishEigenPathWithWayPoints(Eigen::VectorXd & eigen_path_x,
-                    Eigen::VectorXd & eigen_path_y,
-                    Eigen::VectorXd & eigen_path_z,
-                    rviz_visual_tools::colors color = rviz_visual_tools::RED,
-                    rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
-                    const std::string & ns = "Path");   
-
-  bool publishDashedEigenPath(Eigen::VectorXd & eigen_path_x,
-                    Eigen::VectorXd & eigen_path_y,
-                    Eigen::VectorXd & eigen_path_z,
-                    double segmentsLenght = 0.05,
-                    rviz_visual_tools::colors lineColor = rviz_visual_tools::BLACK,
-                    rviz_visual_tools::scales lineScale = rviz_visual_tools::MEDIUM,
-                    const std::string & ns = "Path");
 
   bool publishDashedPolygonPerimeter(Eigen::VectorXd & eigen_path_x,
                     Eigen::VectorXd & eigen_path_y,
@@ -73,18 +52,6 @@ public:
 
   bool publishCube(const geometry_msgs::Point& center, const double& side_size,
                                       rviz_visual_tools::colors color, const std::string& ns, std::size_t id = 0);
-
-  bool publishEigenSpheres(Eigen::VectorXd & eigen_path_x,
-                                              Eigen::VectorXd & eigen_path_y,
-                                              Eigen::VectorXd & eigen_path_z,
-                                              rviz_visual_tools::colors color,
-                                              rviz_visual_tools::scales scale,
-                                              const std::string & ns = "Spheres");
-
-  bool publishEigenSphere(Eigen::Vector3d & point,
-                          rviz_visual_tools::colors color = rviz_visual_tools::GREEN,
-                          rviz_visual_tools::scales scale = rviz_visual_tools::XLARGE,
-                          const std::string & ns = "Sphere");
 
   bool publishTriangle(Eigen::Vector3d v1,
                                         Eigen::Vector3d v2,
@@ -180,12 +147,6 @@ public:
                                         bool frame_flag = true,
                                         rviz_visual_tools::colors color = rviz_visual_tools::TRANSLUCENT,  
                                         double scale = 1.0);
-
-  bool publishDashedLine(Eigen::Vector3d& startingPoint,
-                         Eigen::Vector3d& endPoint,
-                         double segmentsLenght = 0.1,
-                         rviz_visual_tools::colors color = rviz_visual_tools::BLACK,
-                         rviz_visual_tools::scales scale = rviz_visual_tools::XLARGE);
 
   typedef RvizVisualTools RvizVisual;
 
