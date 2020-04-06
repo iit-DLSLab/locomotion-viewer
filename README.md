@@ -3,7 +3,7 @@
 
 
 # Locomotion-viewer: a tool for visualizing locomotion-related geometric objects
-This library specializes on top of the ros melodic rviz-visual-tools package to construct geometrical objects related to robotics legged locomotion such as support regions, trajectories and 2D feasibility constraints.
+This library specializes on top of the ros melodic rviz-visual-tools package to construct geometrical objects related to robotics legged locomotion such as support regions, trajectories and 3D feasibility constraints.
 
 ## What you can visualize in Rviz with locomotion-viewer:
 - dashed lines
