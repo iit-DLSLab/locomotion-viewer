@@ -3,7 +3,7 @@
 
 
 # Locomotion-viewer: a tool for visualizing locomotion-related geometric objects
-This specializes on top of the ros melodic rviz-visual-tools package to construct geometrical objects related to robotics legged locomotion such as support regions, trajectories and 2D feasibility constraints.
+This library specializes on top of the ros melodic rviz-visual-tools package to construct geometrical objects related to robotics legged locomotion such as support regions, trajectories and 2D feasibility constraints.
 
 ## What you can visualize in Rviz with locomotion-viewer:
 - dashed lines
@@ -12,7 +12,7 @@ This specializes on top of the ros melodic rviz-visual-tools package to construc
 
 ## ROS dependencies:
 ```
-sudo apt-get  install ros-kinetic-graph-msgs
+ros-melodic-rviz-visual-tools
 ```
 
 The above dependencies can be installed with the following commands:
