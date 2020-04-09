@@ -17,23 +17,27 @@ namespace locomotion_viewer {
                                   Eigen::VectorXd &eigen_path_z,
                                   rviz_visual_tools::colors color,
                                   rviz_visual_tools::scales scale,
+                                  const double & dashed_line,
                                   const std::string &ns) {
 
+      if(dashed_line){
+        publishDashedEigenPath(eigen_path_x, eigen_path_y, eigen_path_z,  color, scale);
+      }else{
         geometry_msgs::Point temp;
         std::vector<geometry_msgs::Point> trajectory;
         int points_num = eigen_path_x.rows();
 
         for (std::size_t i = 0; i < points_num; ++i) {
-            temp.x = eigen_path_x(i);
-            temp.y = eigen_path_y(i);
-            temp.z = eigen_path_z(i);
+          temp.x = eigen_path_x(i);
+          temp.y = eigen_path_y(i);
+          temp.z = eigen_path_z(i);
 
-            trajectory.push_back(temp);
+          trajectory.push_back(temp);
         }
-
         //publishSphere(first, rviz_visual_tools::RED, rviz_visual_tools::XXXXLARGE, "initial_point");
         //publishSpheres(trajectory, color, rviz_visual_tools::XXXLARGE, "intermediate_points");
         publishPath(trajectory, color, scale, ns);
+      }
     }
 
     bool OneDim::publishEigenPathWithWayPoints(Eigen::VectorXd &eigen_path_x,
@@ -182,7 +186,7 @@ namespace locomotion_viewer {
     bool OneDim::publishDashedEigenPath(Eigen::VectorXd &eigen_path_x,
                                         Eigen::VectorXd &eigen_path_y,
                                         Eigen::VectorXd &eigen_path_z,
-                                        double segmentsLenght,
+                                        double segmentsLength,
                                         rviz_visual_tools::colors lineColor,
                                         rviz_visual_tools::scales lineScale,
                                         const std::string &ns) {
@@ -201,7 +205,7 @@ namespace locomotion_viewer {
             next(1) = eigen_path_y(i + 1);
             next(2) = eigen_path_z(i + 1);
 
-            publishDashedLine(current, next, segmentsLenght, lineColor, lineScale);
+            publishDashedLine(current, next, segmentsLength, lineColor, lineScale);
 
         }
 
