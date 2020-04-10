@@ -8,7 +8,7 @@ This library specializes on top of the ros melodic [rviz-visual-tools](https://g
 ## What you can visualize in Rviz with locomotion-viewer:
 - dashed, dotted and transparent curves;
 - 2D polygons of different colors and with arbitrary number of vertices;
-- complex 3D objects such as tetrahedrons and hexahedrons (given the vertices).
+- 3D objects such as tetrahedrons and hexahedrons (given the vertices).
 
 ## dependencies:
 
