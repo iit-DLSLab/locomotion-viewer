@@ -17,6 +17,8 @@
 
 namespace locomotion_viewer{
 
+    using legs_colors      = std::vector<rviz_visual_tools::colors>;
+
     class LocomotionViewer: public locomotion_viewer::ThreeDim {
 
 public:
@@ -26,6 +28,8 @@ public:
                    ros::NodeHandle nh);
 
   ~LocomotionViewer();
+
+  legs_colors default_legs_colors_ = {rviz_visual_tools::RED,rviz_visual_tools::GREEN,rviz_visual_tools::BLUE,rviz_visual_tools::YELLOW};
 
 private:
 
