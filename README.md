@@ -5,7 +5,7 @@
 This library specializes on top of the ros melodic [rviz-visual-tools](https://github.com/PickNikRobotics/rviz_visual_tools) package to construct geometrical objects related to robotics legged locomotion such as support regions, trajectories and 3D feasibility constraints. All interfaces are provided through Eigen.
 
 ## What you can visualize in Rviz with locomotion-viewer:
-- dashed, dotted and transparent curves;
+- solid, dashed, dotted and transparent curves;
 - 2D polygons of different colors and with arbitrary number of vertices;
 - 3D objects such as tetrahedrons and hexahedrons (given the vertices).
 
