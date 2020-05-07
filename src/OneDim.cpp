@@ -174,7 +174,6 @@ namespace locomotion_viewer {
         }else{
           std::cout<<"[OneDim::publishDashedEigenPath] Warning: the decimation factor ("<<decimation_factor<<") is out of scale."<<std::endl;
         }
-        std::cout<<"points_increment "<<points_increment<<std::endl;
 
         for (std::size_t i = 0; i < points_num - points_increment; i+=points_increment) {
             current.setZero();
