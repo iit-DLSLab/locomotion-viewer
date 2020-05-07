@@ -18,10 +18,11 @@ namespace locomotion_viewer {
                                   rviz_visual_tools::colors color,
                                   rviz_visual_tools::scales scale,
                                   const double & dashed_line,
+                                  const double & decimation_factor,
                                   const std::string &ns) {
 
       if(dashed_line){
-        publishDashedEigenPath(eigen_path_x, eigen_path_y, eigen_path_z,  color, scale);
+        publishDashedEigenPath(eigen_path_x, eigen_path_y, eigen_path_z,  color, scale, decimation_factor);
       }else{
         geometry_msgs::Point temp;
         std::vector<geometry_msgs::Point> trajectory;
@@ -161,21 +162,30 @@ namespace locomotion_viewer {
                                         Eigen::VectorXd &eigen_path_z,
                                         rviz_visual_tools::colors lineColor,
                                         rviz_visual_tools::scales lineScale,
+                                        const double & decimation_factor,
                                         const std::string &ns) {
 
         Eigen::Vector3d current, next;
         int points_num = eigen_path_x.rows();
 
-        for (std::size_t i = 0; i < points_num - 1; i++) {
+        int points_increment = 1;
+        if((decimation_factor>0.0)&&(decimation_factor<=1.0)){
+          points_increment = floor(1.0/decimation_factor*100.0)/100;
+        }else{
+          std::cout<<"[OneDim::publishDashedEigenPath] Warning: the decimation factor ("<<decimation_factor<<") is out of scale."<<std::endl;
+        }
+        std::cout<<"points_increment "<<points_increment<<std::endl;
+
+        for (std::size_t i = 0; i < points_num - points_increment; i+=points_increment) {
             current.setZero();
             next.setZero();
             current(0) = eigen_path_x(i);
             current(1) = eigen_path_y(i);
             current(2) = eigen_path_z(i);
 
-            next(0) = eigen_path_x(i + 1);
-            next(1) = eigen_path_y(i + 1);
-            next(2) = eigen_path_z(i + 1);
+            next(0) = eigen_path_x(i + points_increment);
+            next(1) = eigen_path_y(i + points_increment);
+            next(2) = eigen_path_z(i + points_increment);
 
             publishDashedLine(current, next, lineColor, lineScale);
 

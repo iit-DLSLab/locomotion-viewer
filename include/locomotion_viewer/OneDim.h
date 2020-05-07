@@ -30,6 +30,7 @@ namespace locomotion_viewer {
                               rviz_visual_tools::colors color = rviz_visual_tools::RED,
                               rviz_visual_tools::scales scale = rviz_visual_tools::MEDIUM,
                               const double & dashed_line = false,
+                              const double & decimation_factor = 1.0,
                               const std::string &ns = "Path");
 
         bool publishEigenPathWithWayPoints(Eigen::VectorXd &eigen_path_x,
@@ -44,6 +45,7 @@ namespace locomotion_viewer {
                                     Eigen::VectorXd &eigen_path_z,
                                     rviz_visual_tools::colors lineColor = rviz_visual_tools::BLACK,
                                     rviz_visual_tools::scales lineScale = rviz_visual_tools::MEDIUM,
+                                    const double & decimation_factor = 1.0,
                                     const std::string &ns = "Path");
 
         bool publishDashedEigenPath(Eigen::VectorXd &eigen_path_x,
