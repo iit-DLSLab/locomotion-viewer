@@ -30,6 +30,7 @@ public:
   ~LocomotionViewer();
 
   legs_colors default_legs_colors_ = {rviz_visual_tools::RED,rviz_visual_tools::GREEN,rviz_visual_tools::BLUE,rviz_visual_tools::YELLOW};
+  rviz_visual_tools::colors base_color_;
 
 private:
 
