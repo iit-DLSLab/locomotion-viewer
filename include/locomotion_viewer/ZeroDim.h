@@ -37,6 +37,31 @@ namespace locomotion_viewer {
                                 rviz_visual_tools::scales scale = rviz_visual_tools::XLARGE,
                                 const std::string & ns = "Sphere");
 
+        double Point2isRightOfLine(const Eigen::Vector3d p0,
+                                          const Eigen::Vector3d p1,
+                                          const Eigen::Vector3d p2)
+        {
+          return (p2(1) - p0(1)) * (p1(2) - p0(2))
+                 - (p1(1) - p0(1)) * (p2(2) - p0(2));
+        }
+
+        void ClockwiseSort(std::vector<Eigen::Vector3d>& p)
+        {
+
+          // sort clockwise
+          for (int i = 1; i < p.size() - 1; i++) {
+            for (int j = i + 1; j < p.size(); j++) {
+              //the point p2 should always be on the right to be cwise thus if it
+              //is on the left <0 i swap
+              if (Point2isRightOfLine(p[0], p[i], p[j])  < 0.0) {
+                Eigen::Vector3d tmp = p[i];
+                p[i] = p[j];
+                p[j] = tmp;
+              }
+            }
+          }
+        }
+
     private:
 
     };

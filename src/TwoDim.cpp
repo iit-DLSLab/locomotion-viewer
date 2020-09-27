@@ -323,31 +323,33 @@ namespace locomotion_viewer {
                                                       double scale,
                                                       const std::string & ns){
         std::vector<geometry_msgs::Point> points;
+        std::vector<Eigen::Vector3d> vertices = {v1, v2, v3, v4};
+        ClockwiseSort(vertices);
 
         geometry_msgs::Point p[5];
-        p[0].x = v1(0) + pose.position.x;
-        p[0].y = v1(1) + pose.position.y;
-        p[0].z = v1(2) + pose.position.z;
+        p[0].x = vertices.at(0)(0) + pose.position.x;
+        p[0].y = vertices.at(0)(1) + pose.position.y;
+        p[0].z = vertices.at(0)(2) + pose.position.z;
         points.push_back(p[0]);
 
-        p[1].x = v2(0) + pose.position.x;
-        p[1].y = v2(1) + pose.position.y;
-        p[1].z = v2(2) + pose.position.z;
+        p[1].x = vertices.at(1)(0) + pose.position.x;
+        p[1].y = vertices.at(1)(1) + pose.position.y;
+        p[1].z = vertices.at(1)(2) + pose.position.z;
         points.push_back(p[1]);
 
-        p[2].x = v3(0) + pose.position.x;
-        p[2].y = v3(1) + pose.position.y;
-        p[2].z = v3(2) + pose.position.z;
+        p[2].x = vertices.at(2)(0) + pose.position.x;
+        p[2].y = vertices.at(2)(1) + pose.position.y;
+        p[2].z = vertices.at(2)(2) + pose.position.z;
         points.push_back(p[2]);
 
-        p[3].x = v4(0) + pose.position.x;
-        p[3].y = v4(1) + pose.position.y;
-        p[3].z = v4(2) + pose.position.z;
+        p[3].x = vertices.at(3)(0) + pose.position.x;
+        p[3].y = vertices.at(3)(1) + pose.position.y;
+        p[3].z = vertices.at(3)(2) + pose.position.z;
         points.push_back(p[3]);
 
-        p[4].x = v1(0) + pose.position.x;
-        p[4].y = v1(1) + pose.position.y;
-        p[4].z = v1(2) + pose.position.z;
+        p[4].x = vertices.at(0)(0) + pose.position.x;
+        p[4].y = vertices.at(0)(1) + pose.position.y;
+        p[4].z = vertices.at(0)(2) + pose.position.z;
         points.push_back(p[4]);
 
         return publishPath(points, color, scale, ns);
